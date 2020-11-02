@@ -1,0 +1,31 @@
+.code-block{
+	background-color: #000;
+}
+
+.p20{padding: 20px;}
+.p10{padding: 10px;}
+
+.code-block pre{
+	color: #fff;
+	font-size: 12px;
+	margin: 0px;
+    word-break: break-all;
+    overflow: scroll;
+    line-height: 25px;
+}
+
+.yellow{
+	color: yellowgreen;
+}
+
+.orange{
+	color: orange;
+}
+
+.blue{
+	color: deepskyblue;
+}
+
+.pink{
+	color: pink;
+}

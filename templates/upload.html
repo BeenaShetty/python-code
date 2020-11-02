@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="p10">Single File Upload</h3>
+<div class="row">
+   <div class="col-sm-6 border p20">
+    {% if error %}
+      <div class="alert alert-danger">Error: {{ error }}</div>
+    {% endif %}
+    {% if success %}
+      <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+  <form method="POST" action="upload" enctype="multipart/form-data">
+    <input type="file"  name="photo"><br/><br/>
+    <input type = "submit" value = "submit" class="btn btn-primary">
+  </form>
+   </div>
+  <div class="col-sm-6 code-block border p20">
+    <pre>
+<span class="yellow">@app.route</span>(<span class="orange">'/upload'</span>, methods=[<span class="orange">"POST"</span>,<span class="orange">"GET"</span>])
+<span class="blue">def</span> <span class="yellow">upload()</span>:
+  success = <span class="blue">None</span>
+  error = <span class="blue">None</span>
+  <span class="pink">if</span> request.method == <span class="orange">"POST"</span> 
+    <span class="pink">if</span> <span class="orange">'photo'</span> <span class="blue">in</span> request.files <span class="blue">and</span> request.files[<span class="orange">'photo'</span>].filename != '':
+      uploaded_photo = request.files[<span class="orange">'photo'</span>]
+      uploaded_photo.save(os.path.join(app.config[<span class="orange">"IMAGE_UPLOADS"</span>]+"/single", photo.filename))
+      success = <span class="orange">"File uploaded successfully"</span>
+    <span class="pink">else</span>:
+      error=<span class="orange">"Please upload file"</span>
+  <span class="pink">return</span> render_template(<span class="orange">"upload.html"</span>, success=success, error=error)
+  </pre>
+ </div>
+</div>
+{% endblock %}

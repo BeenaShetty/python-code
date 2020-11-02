@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+   <h3 class="p10">Multiple File Upload with max limit 2</h3>
+   <div class="row">
+      <div class="col-sm-6 border p20">
+         {% if error %}
+            <div class="alert alert-danger">Error: {{ error }}</div>
+         {% endif %}
+         {% if success %}
+            <div class="alert alert-success">{{ success }}</div>
+         {% endif %}
+         <form method="POST" action="multi-upload" enctype="multipart/form-data">
+               <input type="file"  name="photo" multiple><br/><br/>
+               <input type = "submit" value = "submit" class="btn btn-primary">
+            </form>
+            <!-- <script>
+               $(function(){
+                  $("input[type = 'submit']").click(function(){
+                     var $fileUpload = $("input[type='file']");
+                     if (parseInt($fileUpload.get(0).files.length) > 2){
+                        alert("You are only allowed to upload a maximum of 2 files");
+                     }
+                  });
+               });
+            </script> -->
+      </div>
+      <div class="col-sm-6 code-block border p20">
+         <pre>
+<span class="yellow">@app.route</span>(<span class="orange">'/multi-upload'</span>, methods=[<span class="orange">"POST"</span>,<span class="orange">"GET"</span>])
+<span class="blue">def</span> <span class="yellow">multi_upload()</span>:
+   success = <span class="blue">None</span>
+   <span class="pink">if</span> request.method == <span class="orange">"POST"</span> <span class="blue">and</span> <span class="orange">'photo'</span> <span class="blue">in</span> request.files:
+      uploaded_photos = request.files.getlist(<span class="orange">'photo'</span>)
+      <span class="pink">if</span> <span class="yellow">len</span>(uploaded_photos) > <span class="yellow">2</span>:
+         error=<span class="orange">"Max 2 files are allowed to upload"</span>
+      <span class="pink">else</span>:
+         <span class="pink">for</span> photo <span class="pink">in</span> uploaded_photos:
+            photo.save(os.path.join(app.config[<span class="orange">"IMAGE_UPLOADS"</span>]+"/multi", photo.filename))
+            success = <span class="orange">"File uploaded successfully"</span>
+   <span class="pink">return</span> render_template(<span class="orange">"multi_upload.html"</span>, success=success, error=error)
+         </pre>
+      </div>
+   </div>
+{% endblock %}
