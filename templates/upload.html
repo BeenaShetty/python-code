@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h3 class="p10">Single File Upload</h3>
-<div class="row">
+<div class="row" style="height: 250px;">
    <div class="col-sm-6 border p20">
     {% if error %}
       <div class="alert alert-danger">Error: {{ error }}</div>
@@ -13,7 +13,18 @@
     <input type="file"  name="photo"><br/><br/>
     <input type = "submit" value = "submit" class="btn btn-primary">
   </form>
-   </div>
+  <div class="row">
+    <div class="col align-self-start code-block border p20" style="position: absolute;margin-top: 65px;bottom: 0;">
+      <pre>
+<span class="yellow">HTML CODE:</span>
+<<span class="blue">form</span> method=<span class="orange">"POST"</span> action=<span class="orange">"upload"</span> enctype=<span class="orange">"multipart/form-data"</span>>
+  <<span class="blue">input</span> type=<span class="orange">"file"</span> name=<span class="orange">"photo"</span>>
+  <<span class="blue">input</span> type = <span class="orange">"submit"</span> value = <span class="orange">"submit"</span> class=<span class="orange">"btn btn-primary"</span>>
+<<span class="blue">/form</span>>
+      </pre>
+    </div>
+  </div>
+</div>
   <div class="col-sm-6 code-block border p20">
     <pre>
 <span class="yellow">@app.route</span>(<span class="orange">'/upload'</span>, methods=[<span class="orange">"POST"</span>,<span class="orange">"GET"</span>])
